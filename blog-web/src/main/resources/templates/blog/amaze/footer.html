@@ -1,0 +1,66 @@
+<!DOCTYPE html><!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="am-topbar am-with-topbar-fixed-bottom">
+<footer class="blog-footer" th:fragment="footer-fragment" style="background-color: darkseagreen">
+    <div class="am-g am-g-fixed blog-fixed am-u-sm-centered blog-footer-padding">
+        <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
+            <h3>博客简介</h3>
+            <p class="am-text-sm">这是一个基于Spring Boot的开源轻量级博客<br> 博客/ 资讯类 <br>
+                支持响应式，多种布局，包括主页、文章页、媒体页、分类页等<br>互联网世界有我们而精彩！<br>
+                原开源github地址:<a href="https://github.com/renjiahua945/Lumos" target="_blank" style="color: #8dc1df; "> Lumos</a><br>
+        </div>
+        <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
+            <h3>社交账号</h3>
+            <p>
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=2017418422&site=qq&menu=yes" target="_blank"><span
+                        class="am-icon-qq am-icon-fw am-primary blog-icon"></span></a>
+                <a href="https://github.com/liwei125" target="_blank"><span
+                        class="am-icon-github am-icon-fw blog-icon"></span></a>
+                <a href="https://weibo.com/levi125" target="_blank"><span
+                        class="am-icon-weibo am-icon-fw blog-icon blog-icon"></span></a>
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=XG5sbWtobWRobm4cLS1yPzMx"
+                   target="_blank"><span
+                        class="am-icon-reddit am-icon-fw blog-icon"></span></a>
+                <a href="#am-wechat" data-am-modal><span
+                        class="am-icon-weixin am-icon-fw blog-icon"></span></a>
+            </p>
+            <h3>Credits</h3>
+            <p>这个博客有很多不足的地方，希望大家包容、不吝赐教，给我提意见、建议。感谢你们！</p>
+        </div>
+        <div class="am-u-sm-12 am-u-md-4- am-u-lg-4">
+            <h1>我们站在巨人的肩膀上</h1>
+            <h3>Heroes</h3>
+            <p>
+            <ul>
+                <li>Spring Boot</li>
+                <li>Thymeleaf</li>
+                <li>Baidu AI</li>
+                <li>AmazeUI</li>
+                <li>...</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="blog-text-center" th:text="${configurations.get('footerCopyRight')}">© 2020 AllMobilize, Inc. Licensed
+        under Apache license.
+    </div>
+    <div class="blog-text-center">
+        <a th:href="${configurations.get('footerPoweredBy')}">Powered By
+            <th:block th:text="${configurations.get('yourName')}"></th:block>
+        </a>
+    </div>
+    <div class="blog-text-center">
+        <a target="_blank" href="http://www.beian.miit.gov.cn/" th:text="${configurations.get('footerICP')}">冀
+            xxxxxx</a>
+    </div>
+    <div class="am-modal am-modal-no-btn am-modal-out" tabindex="-1" id="am-wechat"
+         style="display: none; margin-top: -159px;color: black">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd"><a href="" class="am-close am-close-spin" data-am-modal-close="">×</a></div>
+            <div class="am-modal-bd"><img th:src="@{/blog/amaze/images/website.png}" alt="作者微信" style="width: 50%">
+                <br>有问题加我微信，不要闲聊！
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/blog/live2d-widget/autoload.js}"></script>
+</footer>
+</html>

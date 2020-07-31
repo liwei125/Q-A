@@ -26,7 +26,7 @@ public class FilterConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 路径映射
         String path = System.getProperty("user.dir").replaceAll("\\\\", "/") + FILE_PATH;
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:" + path);
+        registry.addResourceHandler(FILE_PATH + "**").addResourceLocations("file:" + path);
     }
 
 }

@@ -4,10 +4,7 @@ import club.javafan.blog.common.result.ResponseResult;
 import club.javafan.blog.common.util.BlogUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +21,11 @@ import java.util.Random;
  * @desc 上传
  */
 @Controller
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
 public class UploadController {
     @Value("${file.file-path}")
     private String FILE_PATH;
-    @PostMapping({"/upload/file"})
+    @PostMapping({"/admin/upload/file"})
     @ResponseBody
     public ResponseResult upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws Exception {
         String fileName = file.getOriginalFilename();
@@ -44,7 +41,7 @@ public class UploadController {
         try {
             file.transferTo(destFile);
             ResponseResult resultSuccess = ResponseResult.successResult("成功！");
-            resultSuccess.setData(BlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/img/" + newFileName);
+            resultSuccess.setData(BlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + FILE_PATH + newFileName);
             return resultSuccess;
         } catch (IOException e) {
             return ResponseResult.failResult("文件上传失败！");

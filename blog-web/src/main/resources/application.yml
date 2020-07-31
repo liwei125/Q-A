@@ -14,8 +14,8 @@ spring:
   #关闭自动context /
   application:
     name: blog
-#  jmx:
-#    enabled: false
+  #  jmx:
+  #    enabled: false
   #设置redis
   #设置连接池
   datasource:
@@ -78,7 +78,7 @@ spring:
   mail:
     default-encoding: utf-8
     #收件人
-    to: xxxxxx@qq.com
+    to: 2017418422@qq.com
     #抄送列表 ,分隔
     cc: xx@qq.com,xx@qq.com
     subject: 博客日报 #博客主题

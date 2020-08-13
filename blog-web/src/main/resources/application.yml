@@ -119,9 +119,9 @@ server:
     key-store-password: ren123
     key-store-type: JKS
     key-alias: was
-  port: 443
+  port: 4433 #打成jar包在linux上运行，443和80这些小于1024的端口都需要权限才能启动项目。
 http:
-  port: 80
+  port: 8080
 #设置线程池
 thread:
   core-pool-size: 20
@@ -131,7 +131,7 @@ thread:
   keep-alive-seconds: 500
 #文件上传路径
 file:
-  file-path: /work/deploy/upload/
+  file-path: /upload/
 #guava 设置
 guava:
   time: 1

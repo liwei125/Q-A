@@ -18,11 +18,18 @@ public class MultiPartConfig {
 
     @Value("${file.file-path}")
     private String FILE_PATH;
+    @Value("${linux.deploy-path}")
+    private String DEPLOY_PATH;
 
     @Bean
     MultipartConfigElement multipartConfigElement() throws Exception {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        String location = System.getProperty("user.dir").replaceAll("\\\\", "/") + FILE_PATH;
+        String systemPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
+        if (systemPath.equals("/")) {
+            System.setProperty("user.dir", DEPLOY_PATH);
+            systemPath = DEPLOY_PATH;
+        }
+        String location = systemPath + FILE_PATH;
         File file = new File(location);
         if (!file.exists()) {
             if (!file.mkdirs()) {

@@ -21,11 +21,11 @@ import java.util.Random;
  * @desc 上传
  */
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class UploadController {
     @Value("${file.file-path}")
     private String FILE_PATH;
-    @PostMapping({"/admin/upload/file"})
+    @PostMapping({"/upload/file"})
     @ResponseBody
     public ResponseResult upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws Exception {
         String fileName = file.getOriginalFilename();
@@ -41,7 +41,7 @@ public class UploadController {
         try {
             file.transferTo(destFile);
             ResponseResult resultSuccess = ResponseResult.successResult("成功！");
-            resultSuccess.setData(BlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + FILE_PATH + newFileName);
+            resultSuccess.setData(BlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/img/" + newFileName);
             return resultSuccess;
         } catch (IOException e) {
             return ResponseResult.failResult("文件上传失败！");

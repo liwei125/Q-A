@@ -13,6 +13,7 @@ import club.javafan.blog.domain.vo.BlogListVO;
 import club.javafan.blog.domain.vo.SimpleBlogListVO;
 import club.javafan.blog.repository.*;
 import club.javafan.blog.service.BlogService;
+import com.google.common.cache.Cache;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
@@ -22,10 +23,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static club.javafan.blog.common.constant.CacheConstant.BLOG_DETAIL;
 import static club.javafan.blog.common.constant.RedisKeyConstant.BLOG_VIEW_ZSET;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
@@ -52,6 +55,9 @@ public class BlogServiceImpl implements BlogService {
     private BlogCommentMapper blogCommentMapper;
     @Autowired
     private RedisUtil redisUtil;
+    @Resource
+    private Cache<String,Object> guavaCache;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public ResponseResult saveBlog(Blog blog) {
@@ -174,6 +180,8 @@ public class BlogServiceImpl implements BlogService {
         batchTagsRelation(blog, blogCategory, tags);
         int con = blogMapper.updateByPrimaryKeySelective(blog);
         if (con > INTEGER_ZERO) {
+            //删除guavaCache
+            guavaCache.invalidate(BLOG_DETAIL + blog.getBlogId());
             return ResponseResult.successResult("修改成功！");
         }
         return ResponseResult.failResult("修改失败！");

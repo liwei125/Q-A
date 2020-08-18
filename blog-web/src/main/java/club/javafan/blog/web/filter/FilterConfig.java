@@ -31,8 +31,9 @@ public class FilterConfig implements WebMvcConfigurer {
         //修复linux自启动jar无法获取项目路径，默认为/根目录的bug
         if (systemPath.equals("/")) {
             System.setProperty("user.dir", DEPLOY_PATH);
+            systemPath = DEPLOY_PATH;
         }
-        String path = systemPath.equals("/")?DEPLOY_PATH:systemPath + FILE_PATH;
+        String path = systemPath + FILE_PATH;
         System.out.println("文件上传路径映射: " + path);
         registry.addResourceHandler( "/upload/img/**") //捕捉UploadController返回的uri映射到下面的Locations
                 .addResourceLocations("file:" + path); //图片的虚拟路径： 当前系统目录 + file_path
